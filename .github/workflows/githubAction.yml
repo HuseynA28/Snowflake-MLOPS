@@ -37,15 +37,10 @@ jobs:
       - name: Print working directory
         run: pwd
 
-      - name: List files in the repository
-        run: ls -alR
-
       - name: Activate environment and Load Dataset
         run: |
           eval "$(micromamba shell hook --shell bash)"
           micromamba activate mlops
           echo "Loading dataset from notebook..."
           jupyter nbconvert --to notebook --execute  --FilesWriter.build_directory=. "${GITHUB_WORKSPACE}/Notebooks/1_load_data.ipynb"
-      - name: Display notebook execution output
-        run: cat "Notebooks/1_load_data.ipynb" | grep "error"  # Simple error check in output
 
