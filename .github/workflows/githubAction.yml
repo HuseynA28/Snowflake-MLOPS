@@ -33,6 +33,7 @@ jobs:
           micromamba shell init --shell bash --root-prefix=~/micromamba
           export PATH="$HOME/micromamba/bin:$PATH"
           micromamba create --name mlops --file environment.yml --yes
+          micromamba activate mlops
 
       - name: Print working directory
         run: pwd
@@ -45,6 +46,9 @@ jobs:
           jupyter nbconvert --to notebook --execute  --FilesWriter.build_directory=. "${GITHUB_WORKSPACE}/Notebooks/1_load_data.ipynb"
 
       - name: Feature Engineering
+        needs: Activate environment and Load Dataset
         run: |
+          eval "$(micromamba shell hook --shell bash)"
+          micromamba activate mlops
           echo "Starting feature engineering..."
           jupyter nbconvert --to notebook --execute  --FilesWriter.build_directory=. "${GITHUB_WORKSPACE}/Notebooks/feature_engineering.ipynb"
