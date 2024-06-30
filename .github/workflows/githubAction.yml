@@ -1,4 +1,4 @@
-name: Load Dataset
+name: SnowflakeMLOPS
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  load_dataset:
+  data_processing:
     runs-on: ubuntu-latest
 
     env:
@@ -44,3 +44,7 @@ jobs:
           echo "Loading dataset from notebook..."
           jupyter nbconvert --to notebook --execute  --FilesWriter.build_directory=. "${GITHUB_WORKSPACE}/Notebooks/1_load_data.ipynb"
 
+      - name: Feature Engineering
+        run: |
+          echo "Starting feature engineering..."
+          jupyter nbconvert --to notebook --execute  --FilesWriter.build_directory=. "${GITHUB_WORKSPACE}/Notebooks/feature_engineering.ipynb"
