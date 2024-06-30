@@ -27,15 +27,22 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install and Setup Micromamba
+      - name: Install Jupyter and Micromamba
         run: |
           "${SHELL}" <(curl -L micro.mamba.pm/install.sh)
           micromamba shell init --shell bash --root-prefix=~/micromamba
           export PATH="$HOME/micromamba/bin:$PATH"
           micromamba create --name mlops --file environment.yml --yes
+      - name: List files in the notebook directory
+        run: |
+            ls -l notebooks/
+        
 
-      - name: Activate environment and Load Dataset
+      - name: Load Dataset
         run: |
           eval "$(micromamba shell hook --shell bash)"
           micromamba activate mlops
           jupyter nbconvert --to notebook --execute notebooks/01_load_dataset.ipynb
+        working-directory: ${{ github.workspace }}
+        
+
