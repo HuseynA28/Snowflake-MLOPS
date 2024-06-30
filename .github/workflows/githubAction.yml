@@ -25,30 +25,24 @@ jobs:
       - name: Set up Python 3.11
         uses: actions/setup-python@v3
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
       - name: Install Jupyter and Micromamba
         run: |
-          "${SHELL}" <(curl -L micro.mamba.pm/install.sh)
+          curl -L micro.mamba.pm/install.sh | bash
           micromamba shell init --shell bash --root-prefix=~/micromamba
-          export PATH="$HOME/micromamba/bin:$PATH"
+          echo 'export PATH="$HOME/micromamba/bin:$PATH"' >> $GITHUB_ENV
+          source ~/micromamba/etc/profile.d/mamba.sh
           micromamba create --name mlops --file environment.yml --yes
-          micromamba activate mlops
+          echo 'micromamba activate mlops' >> $GITHUB_ENV
 
       - name: Print working directory
         run: pwd
 
-      - name: Activate environment and Load Dataset
+      - name: Load Dataset
         run: |
-          eval "$(micromamba shell hook --shell bash)"
-          micromamba activate mlops
-          echo "Loading dataset from notebook..."
-          jupyter nbconvert --to notebook --execute  --FilesWriter.build_directory=. "${GITHUB_WORKSPACE}/Notebooks/1_load_data.ipynb"
+          jupyter nbconvert --to notebook --execute --FilesWriter.build_directory=. "${GITHUB_WORKSPACE}/Notebooks/1_load_data.ipynb"
 
       - name: Feature Engineering
-        needs: Activate environment and Load Dataset
         run: |
-          eval "$(micromamba shell hook --shell bash)"
-          micromamba activate mlops
-          echo "Starting feature engineering..."
-          jupyter nbconvert --to notebook --execute  --FilesWriter.build_directory=. "${GITHUB_WORKSPACE}/Notebooks/feature_engineering.ipynb"
+          jupyter nbconvert --to notebook --execute --FilesWriter.build_directory=. "${GITHUB_WORKSPACE}/Notebooks/feature_engineering.ipynb"
