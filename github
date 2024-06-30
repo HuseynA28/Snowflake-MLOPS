@@ -1,0 +1,40 @@
+name: Load Dataset
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  load_dataset:
+    runs-on: ubuntu-latest
+
+    env:
+      SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+      SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+      SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
+      SNOWFLAKE_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
+      SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+      SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.11"
+
+      - name: Install Jupyter and Micromamba
+        run: |
+          "${SHELL}" <(curl -L micro.mamba.pm/install.sh)
+          micromamba shell init --shell bash --root-prefix=~/micromamba
+          export PATH="$HOME/micromamba/bin:$PATH"
+          micromamba install jupyter -y
+          micromamba create --file environment.yml --yes
+
+      - name: Load Dataset
+        run: |
+          micromamba run -n my_env jupyter nbconvert --to notebook --execute notebooks/01_load_dataset.ipynb
