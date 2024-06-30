@@ -33,16 +33,14 @@ jobs:
           micromamba shell init --shell bash --root-prefix=~/micromamba
           export PATH="$HOME/micromamba/bin:$PATH"
           micromamba create --name mlops --file environment.yml --yes
-      - name: List files in the notebook directory
-        run: |
-            ls -l notebooks/
-        
 
-      - name: Load Dataset
+      - name: Activate environment and Load Dataset
         run: |
-          eval "$(micromamba shell hook --shell bash)"
-          micromamba activate mlops
-          jupyter nbconvert --to notebook --execute notebooks/01_load_dataset.ipynb
-        working-directory: ${{ github.workspace }}
+            eval "$(micromamba shell hook --shell bash)"
+            micromamba activate mlops
+            jupyter nbconvert --to notebook --execute Notebooks/dataset/1_load_data.ipynb
+          
+          
+        
         
 
