@@ -22,4 +22,5 @@ dependencies:
   - snowflake-ml-python
   - snowflake-snowpark-python
   - scikit-learn
+  - prefect
 
