@@ -37,16 +37,10 @@ jobs:
       - name: Print working directory
         run: pwd
 
-      - name: Activate environment and Load Dataset
+      - name: Load Dataset
         run: |
-          eval "$(micromamba shell hook --shell bash)"
-          micromamba activate mlops
-          echo "Loading dataset from notebook..."
-          jupyter nbconvert --to notebook --execute  --FilesWriter.build_directory=. "${GITHUB_WORKSPACE}/Notebooks/1_load_data.ipynb"
+          micromamba run -n mlops jupyter nbconvert --to notebook --execute --FilesWriter.build_directory=. "${GITHUB_WORKSPACE}/Notebooks/1_load_data.ipynb"
 
       - name: Feature Engineering
         run: |
-          eval "$(micromamba shell hook --shell bash)"
-          micromamba activate mlops
-          echo "Starting feature engineering..."
-          jupyter nbconvert --to notebook --execute  --FilesWriter.build_directory=. "${GITHUB_WORKSPACE}/Notebooks/feature_engineering.ipynb"
+          micromamba run -n mlops jupyter nbconvert --to notebook --execute --FilesWriter.build_directory=. "${GITHUB_WORKSPACE}/Notebooks/feature_engineering.ipynb"
