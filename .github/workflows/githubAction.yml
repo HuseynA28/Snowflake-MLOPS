@@ -45,9 +45,4 @@ jobs:
           eval "$(micromamba shell hook --shell bash)"
           micromamba activate mlops
           echo "Loading dataset from notebook..."
-          jupyter nbconvert --to notebook --execute --allow-errors "${GITHUB_WORKSPACE}/Notebooks/dataset/1_load_data.ipynb"
-
-          
-        
-        
-
+          jupyter nbconvert --to notebook --execute --allow-errors --FilesWriter.build_directory=. "${GITHUB_WORKSPACE}/Notebooks/1_load_data.ipynb"
