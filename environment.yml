@@ -9,7 +9,7 @@ dependencies:
   - python-dotenv
   - seaborn
   - snowflake-snowpark-python
-  - scikit-learn
+  - scikit-learn=1.3.0
   - xgboost
   - absl-py
   - anyio
