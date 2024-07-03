@@ -26,5 +26,4 @@ dependencies:
   - mlflow
   - fastapi 
   - uvicorn
-  - dotenv 
 
