@@ -23,4 +23,8 @@ dependencies:
   - snowflake-snowpark-python
   - scikit-learn
   - prefect
+  - mlflow
+  - fastapi 
+  - uvicorn
+  - dotenv 
 
