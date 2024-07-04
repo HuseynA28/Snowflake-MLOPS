@@ -48,7 +48,7 @@ jobs:
         run: |
           micromamba run -n mlops jupyter nbconvert --to notebook --execute --FilesWriter.build_directory=. "${GITHUB_WORKSPACE}/Notebooks/train_save_model.ipynb"
       - name: Log in to Docker Hub
-        run: echo "${{ secrets.PASSWORD }}" | docker login -u "${{ secrets.DOCKERUSERNAME }}" --password-stdin
+        run: echo "${{ secrets.DOCKERPASSWORD }}" | docker login -u "${{ secrets.DOCKERUSERNAME }}" --password-stdin
 
       - name: Build Docker image
         run: docker build -t ${{ secrets.DOCKERUSERNAME }}/snowflakeadprediction:latest .
