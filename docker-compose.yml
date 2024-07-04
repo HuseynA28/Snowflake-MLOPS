@@ -1,0 +1,10 @@
+version: '3.11'
+services:
+  webapp:
+    image: snowflakeadprediction:latest
+    ports:
+      - "80:80"  # Maps port 80 of the container to port 80 on the host machine.
+    env_file:
+      - .env  # Specifies that environment variables should be loaded from a file named .env
+    restart: unless-stopped  # The service will always restart unless it is manually stopped.
+
