@@ -26,6 +26,7 @@ def read_root():
 @app.get("/predict/")
 def predict(tv: float, radio: float, newspaper: float):
     try:
+        
         advertising_df = session.create_dataframe([[tv, radio, newspaper]], schema=["TV", "RADIO", "NEWSPAPER"])
         
         predicted_sales_df = advertising_df.select(
