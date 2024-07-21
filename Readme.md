@@ -55,7 +55,9 @@ The project is divided into several components, each addressing a part of the ML
 └── README.md                   # The README file
 
 
-Read more about the project https://medium.com/@huseynabdullayev_34266/snowflake-model-deployment-mlops-in-snowflake-9f88118f38d5
+```plaintext
+
+### Read more about the project https://medium.com/@huseynabdullayev_34266/snowflake-model-deployment-mlops-in-snowflake-9f88118f38d5
 
 
 
