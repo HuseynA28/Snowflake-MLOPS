@@ -32,6 +32,9 @@ The project is divided into several components, each addressing a part of the ML
 2. **Automation with GitHub Actions**: Setting up continuous integration and deployment pipelines to automate the testing, building, and deployment of machine learning models.
 3. **Deployment Using Docker**: Packaging the trained models into Docker containers to ensure that the deployment environment is consistent and isolated.
 
+### Read more about the project 
+https://medium.com/@huseynabdullayev_34266/snowflake-model-deployment-mlops-in-snowflake-9f88118f38d5
+
 ## Project Structure
 
 ```plaintext
@@ -55,9 +58,9 @@ The project is divided into several components, each addressing a part of the ML
 └── README.md                   # The README file
 
 
-```plaintext
+``` plaintext
 
-### Read more about the project https://medium.com/@huseynabdullayev_34266/snowflake-model-deployment-mlops-in-snowflake-9f88118f38d5
+
 
 
 
