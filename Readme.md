@@ -58,7 +58,6 @@ https://medium.com/@huseynabdullayev_34266/snowflake-model-deployment-mlops-in-s
 └── README.md                   # The README file
 
 
-``` plaintext
 
 
 
